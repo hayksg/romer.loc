@@ -16,11 +16,13 @@
         "zendframework/zend-component-installer": "^1.0 || ^0.7 || ^1.0.0-dev@dev",
         "zendframework/zend-mvc": "^3.0.1",
         "zfcampus/zf-development-mode": "^3.0",
-        "zendframework/zend-mvc-console": "^1.1.10"
+        "zendframework/zend-mvc-console": "^1.1.10",
+        "zendframework/zend-navigation": "^2.8"
     },
     "autoload": {
         "psr-4": {
-            "Application\\": "module/Application/src/"
+            "Application\\": "module/Application/src/",
+            "Tutorial\\": "module/Tutorial/src/"
         }
     },
     "autoload-dev": {

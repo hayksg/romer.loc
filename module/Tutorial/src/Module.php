@@ -1,6 +1,6 @@
 <?php
 
-namespace Application;
+namespace Tutorial;
 
 class Module
 {
@@ -11,20 +11,20 @@ class Module
         return include __DIR__ . '/../config/module.config.php';
     }
 
-    public function getViewHelperConfig()
+    public function getServiceConfig()
     {
         return [
             'invokables' => [
-                'getYear' => View\Helper\GetYear::class,
+                'greetingService' => Service\GreetingService::class,
             ],
         ];
     }
 
-    public function getServiceConfig()
+    public function getControllerConfig()
     {
         return [
             'factories' => [
-                'top_navigation' => Service\TopNavigationService::class,
+                Controller\IndexController::class => Controller\IndexControllerFactory::class,
             ],
         ];
     }
