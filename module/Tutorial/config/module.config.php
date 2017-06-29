@@ -4,6 +4,8 @@ namespace Tutorial;
 
 use Zend\Router\Http\Literal;
 use Zend\Router\Http\Segment;
+use Zend\Router\Http\Regex;
+use Zend\Router\Http\Method;
 use Zend\ServiceManager\Factory\InvokableFactory;
 
 return [
@@ -19,11 +21,90 @@ return [
                     ],
                 ],
             ],
+            'sample' => [
+                'type' => Segment::class,
+                'options' => [
+                    'route'    => '/sample',
+                    'defaults' => [
+                        'controller' => Controller\IndexController::class,
+                        'action'     => 'sample',
+                    ],
+                ],
+            ],
+            /*'article' => [
+                'type' => Regex::class,
+                'options' => [
+                    'regex' => '/article(/(?<action>[a-z]*)/(?<id>[0-9]+))?',
+                    'spec' => '/%action%/%id%',
+                    'defaults' => [
+                        'controller' => Controller\ArticleController::class,
+                        'action'     => 'index',
+                    ],
+                ],
+            ],*/
+            /*'article' => [
+                'type' => Segment::class,
+                'options' => [
+                    'route' => '/article[/:action[/:id]]',
+                    'constraints' => [
+                        'action' => '[a-z]*',
+                        'id'     => '[0-9]+',
+                    ],
+                    'defaults' => [
+                        'controller' => Controller\ArticleController::class,
+                        'action'     => 'index',
+                    ],
+                ],
+            ],*/
+            'article' => [
+                'type' => Segment::class,
+                'options' => [
+                    'route' => '/article',
+                    'defaults' => [
+                        'controller' => Controller\ArticleController::class,
+                        'action'     => 'index',
+                        //'action'     => rand(0, 1) ? 'post-add' : 'add',
+                    ],
+                ],
+                'may_terminate' => true,
+            ],
+            'articleAction' => [
+                'type' => Segment::class,
+                'options' => [
+                    'route' => '/article/add[/:id]',
+                    'constraints' => [
+                        'action' => '[a-z]*',
+                        'id'     => '[0-9]+',
+                    ],
+                ],
+                'child_routes' => [
+                    'get' => [
+                        'type' => Method::class,
+                        'options' => [
+                            'verb' => 'get',
+                            'defaults' => [
+                                'controller' => Controller\ArticleController::class,
+                                'action'     => 'add',
+                            ],
+                        ],
+                    ],
+                    'post' => [
+                        'type' => Method::class,
+                        'options' => [
+                            'verb' => 'post',
+                            'defaults' => [
+                                'controller' => Controller\ArticleController::class,
+                                'action'     => 'post-add',
+                            ],
+                        ],
+                    ],
+                ],
+            ],
         ],
     ],
     'controllers' => [
         'factories' => [
-            //Controller\IndexController::class => InvokableFactory::class,
+            Controller\ArticleController::class => InvokableFactory::class,
         ],
     ],
     'view_manager' => [

@@ -1,0 +1,14 @@
+<?php
+$headTitle = 'Article Add';
+$this->headTitle($headTitle);
+?>
+<div class="row">
+    <div class="col-sm-12">
+        <h3><?= $headTitle ?></h3>
+    </div>
+</div>
+<form action="/article/add/<?= $this->id ?>" method="post">
+    <input type="text" name="title">
+    <button>Submit</button>
+</form>
+

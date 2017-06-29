@@ -48,3 +48,21 @@ a:hover, a:focus {
     /* Set the fixed height of the footer here */
     height: 80px;
 }
+
+.success-message {
+    color: #fff;
+    background: green;
+    list-style: none;
+    padding-left: 0;
+    display: inline-block;
+    padding: 5px 10px;
+}
+
+.error-message {
+    color: #fff;
+    background: #d00;
+    list-style: none;
+    padding-left: 0;
+    display: inline-block;
+    padding: 5px 10px;
+}

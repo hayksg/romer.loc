@@ -41,6 +41,24 @@ class Module
         ];
     }
 
+    public function getControllerPluginConfig()
+    {
+        return [
+            'invokables' => [
+                'getDate' => Controller\Plugin\GetDate::class,
+            ],
+        ];
+    }
+
+    public function getViewHelperConfig()
+    {
+        return [
+            'invokables' => [
+                'getTime' => View\Helper\GetTime::class,
+            ],
+        ];
+    }
+
     /*public function init(ModuleManager $e)
     {
         $e->getEventManager()->getSharedManager()->attach(

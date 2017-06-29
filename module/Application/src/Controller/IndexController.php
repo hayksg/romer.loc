@@ -9,6 +9,10 @@ class IndexController extends AbstractActionController
 {
     public function indexAction()
     {
-        return new ViewModel();
+        $url = $this->url()->fromRoute();
+        return new ViewModel([
+            'url' => $url,
+            'date' => $this->getDate(),
+        ]);
     }
 }
