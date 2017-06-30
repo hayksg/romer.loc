@@ -73,7 +73,6 @@ return [
                 'options' => [
                     'route' => '/article/add[/:id]',
                     'constraints' => [
-                        'action' => '[a-z]*',
                         'id'     => '[0-9]+',
                     ],
                 ],
@@ -100,11 +99,65 @@ return [
                     ],
                 ],
             ],
+            /*'product' => [
+                'type' => Regex::class,
+                'options' => [
+                    'regex'  => '/product(/(?<action>[a-z]*)/(?<id>[0-9]+))?',
+                    'spec'   => '/%action%/%id%',
+                    'defaults' => [
+                        'controller' => Controller\ProductController::class,
+                        'action'     => 'index',
+                    ],
+                ],
+            ],*/
+            'product' => [
+                'type' => Segment::class,
+                'options' => [
+                    'route'  => '/product',
+                    'defaults' => [
+                        'controller' => Controller\ProductController::class,
+                        'action'     => 'index',
+                        //'action'     => rand(0, 1) ? 'add' : 'post-add',
+                    ],
+                ],
+            ],
+            'productAdd' => [
+                'type' => Segment::class,
+                'options' => [
+                    'route'  => '/product/add[/:id]',
+                    'constraints'  => [
+                        'id' => '[0-9]+',
+                    ],
+                ],
+                'child_routes' => [
+                    'getAdd' => [
+                        'type' => Method::class,
+                        'options' => [
+                            'verb'  => 'get',
+                            'defaults' => [
+                                'controller' => Controller\ProductController::class,
+                                'action'     => 'add',
+                            ],
+                        ],
+                    ],
+                    'postAdd' => [
+                        'type' => Method::class,
+                        'options' => [
+                            'verb'  => 'post',
+                            'defaults' => [
+                                'controller' => Controller\ProductController::class,
+                                'action'     => 'post-add',
+                            ],
+                        ],
+                    ],
+                ],
+            ],
         ],
     ],
     'controllers' => [
         'factories' => [
             Controller\ArticleController::class => InvokableFactory::class,
+            Controller\ProductController::class => InvokableFactory::class,
         ],
     ],
     'view_manager' => [
