@@ -7,5 +7,11 @@ $this->headTitle($headTitle);
         <h3><?= $headTitle ?></h3>
     </div>
 </div>
-<p><a href="/product/add/20" class="btn btn-default">Add Product</a></p> <!--For method-->
-
+<br>
+<div><a href="/product/add/14" class="btn btn-default">Add product</a></div>
+<p>
+<?php
+    echo $this->flashMessenger()->render('success', ['success-message']);
+    echo $this->flashMessenger()->render('error',   ['error-message']);
+?>
+</p>

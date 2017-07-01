@@ -3,17 +3,13 @@
 namespace Tutorial\Controller;
 
 use Zend\Mvc\Controller\AbstractActionController;
-use Zend\Mvc\MvcEvent;
 use Zend\View\Model\ViewModel;
-use Tutorial\Service\GreetingServiceInterface;
 
 class ProductController extends AbstractActionController
 {
     public function indexAction()
     {
-        return [
 
-        ];
     }
 
     public function addAction()
@@ -24,7 +20,7 @@ class ProductController extends AbstractActionController
         ];
     }
 
-    public function postAddAction()
+    public function addPostAction()
     {
         $id = (int)$this->params()->fromRoute('id', 0);
         $title = $this->request->getPost('title');
@@ -33,6 +29,12 @@ class ProductController extends AbstractActionController
             'id'    => $id,
             'title' => $title,
         ];
+
+        $successMessage = 'Product successfully added';
+        $this->flashMessenger()->addSuccessMessage($successMessage);
+
+        /*$errorMessage = 'Can not add product';
+        $this->flashMessenger()->addErrorMessage($errorMessage);*/
 
         //return $this->redirect()->toRoute('product');
     }

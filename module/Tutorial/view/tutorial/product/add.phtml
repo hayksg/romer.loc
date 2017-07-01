@@ -1,5 +1,5 @@
 <?php
-$headTitle = 'Add Product';
+$headTitle = 'Add product';
 $this->headTitle($headTitle);
 ?>
 <div class="row">
@@ -7,7 +7,10 @@ $this->headTitle($headTitle);
         <h3><?= $headTitle ?></h3>
     </div>
 </div>
-<form action="/product/add/<?= $this->id ?>" method="post">
-    <input type="text" name="title">
-    <button>Submit</button>
-</form>
+<br>
+<div>
+    <form action="/product/add/<?= $this->id ?>" method="post">
+        <input type="text" name="title">
+        <button>Submit</button>
+    </form>
+</div>

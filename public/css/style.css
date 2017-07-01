@@ -56,6 +56,7 @@ a:hover, a:focus {
     padding-left: 0;
     display: inline-block;
     padding: 5px 10px;
+    border-radius: 3px;
 }
 
 .error-message {
@@ -65,4 +66,5 @@ a:hover, a:focus {
     padding-left: 0;
     display: inline-block;
     padding: 5px 10px;
+    border-radius: 3px;
 }

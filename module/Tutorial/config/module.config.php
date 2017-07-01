@@ -99,54 +99,44 @@ return [
                     ],
                 ],
             ],
-            /*'product' => [
-                'type' => Regex::class,
-                'options' => [
-                    'regex'  => '/product(/(?<action>[a-z]*)/(?<id>[0-9]+))?',
-                    'spec'   => '/%action%/%id%',
-                    'defaults' => [
-                        'controller' => Controller\ProductController::class,
-                        'action'     => 'index',
-                    ],
-                ],
-            ],*/
             'product' => [
                 'type' => Segment::class,
                 'options' => [
-                    'route'  => '/product',
+                    'route' => '/product',
                     'defaults' => [
                         'controller' => Controller\ProductController::class,
-                        'action'     => 'index',
-                        //'action'     => rand(0, 1) ? 'add' : 'post-add',
+                        //'action'     => 'index',
+                        'action'     => rand(0, 1) ? 'add' : 'add-post',
                     ],
                 ],
+                'may_terminate' => true,
             ],
-            'productAdd' => [
+            'productAddAction' => [
                 'type' => Segment::class,
                 'options' => [
-                    'route'  => '/product/add[/:id]',
-                    'constraints'  => [
+                    'route' => '/product/add[/:id]',
+                    'constraints' => [
                         'id' => '[0-9]+',
                     ],
                 ],
                 'child_routes' => [
-                    'getAdd' => [
+                    'get' => [
                         'type' => Method::class,
                         'options' => [
-                            'verb'  => 'get',
+                            'verb' => 'get',
                             'defaults' => [
                                 'controller' => Controller\ProductController::class,
                                 'action'     => 'add',
                             ],
                         ],
                     ],
-                    'postAdd' => [
+                    'post' => [
                         'type' => Method::class,
                         'options' => [
-                            'verb'  => 'post',
+                            'verb' => 'post',
                             'defaults' => [
                                 'controller' => Controller\ProductController::class,
-                                'action'     => 'post-add',
+                                'action'     => 'add-post',
                             ],
                         ],
                     ],
