@@ -68,3 +68,7 @@ a:hover, a:focus {
     padding: 5px 10px;
     border-radius: 3px;
 }
+
+.color-red {
+    color: #d00;
+}

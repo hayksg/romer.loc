@@ -1,4 +1,65 @@
 <?php
+
+/*$str = ' <p>Hello world</p> ';
+
+$stripTags  = new \Zend\Filter\StripTags();
+$stringTrim = new \Zend\Filter\StringTrim();
+
+$filterChain = new \Zend\Filter\FilterChain();
+$filterChain->attach($stripTags)
+            ->attach($stringTrim);
+
+$str = $filterChain->filter($str);
+
+var_dump($str);*/
+
+/*$str = 'Hello world';
+
+$stringLength = new Zend\Validator\StringLength(['min' => 1, 'max' => 5]);
+$stringLength->setMessages([
+    Zend\Validator\StringLength::TOO_SHORT => 'Too short',
+    Zend\Validator\StringLength::TOO_LONG  => 'Too long',
+]);
+
+$alpha = new \Zend\I18n\Validator\Alpha();
+$alpha->setMessages([
+   Zend\I18n\Validator\Alpha::NOT_ALPHA => 'Not alpha',
+]);
+
+$validatorChain = new \Zend\Validator\ValidatorChain();
+$validatorChain->attach($stringLength)
+               ->attach($alpha);
+
+if ($validatorChain->isValid($str)) {
+    echo "Ok";
+} else {
+    foreach ($validatorChain->getMessages() as $message) {
+        echo "<div>{$message}</div>";
+    }
+}*/
+
+$value = 105;
+
+$float = new \Tutorial\Validator\FloatValidator();
+
+if ($float->isValid($value)) {
+    echo 'Ok';
+} else {
+    foreach ($float->getMessages() as $message) {
+        echo "<div>{$message}</div>";
+    }
+}
+
+?>
+
+
+
+
+
+
+
+
+<?php
 $headTitle = 'Home';
 $this->headTitle($headTitle);
 ?>
