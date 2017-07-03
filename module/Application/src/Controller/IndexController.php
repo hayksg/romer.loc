@@ -2,8 +2,8 @@
 
 namespace Application\Controller;
 
-use Zend\Http\Headers;
 use Zend\Http\Response\Stream;
+use Zend\Http\Headers;
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
 
@@ -25,10 +25,10 @@ class IndexController extends AbstractActionController
         $file = getcwd() . self::DS . 'public'
                          . self::DS . 'img'
                          . self::DS . 'c.jpg';
-
+        
         if (is_file($file)) {
             $fileSize = filesize($file);
-
+            
             $response = new Stream();
             $response->setStream(fopen($file, 'r'))
                      ->setStreamName(basename($file))
@@ -43,9 +43,11 @@ class IndexController extends AbstractActionController
             $response->setHeaders($headers);
             return $response;
         }
-
+        
         return false;
     }
+    
+    
 
 
 }
