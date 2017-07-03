@@ -2,27 +2,32 @@
 
 namespace Tutorial\Controller;
 
-use Zend\Http\Header\SetCookie;
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\Mvc\MvcEvent;
 use Zend\View\Model\ViewModel;
 use Tutorial\Service\GreetingServiceInterface;
 use Zend\Session\Container;
+use Zend\Http\Header\SetCookie;
 
 class ArticleController extends AbstractActionController
 {
     public function indexAction()
     {
         $message = '';
-        /*$container = new Container('add_product');
+
+        /*$container = new Container('addArticle');
         $message = $container->message;
-        $container->getManager()->getStorage()->clear('add_product');*/
+        $container->getManager()->getStorage()->clear('addArticle');*/
 
-        $message = $this->appGetCookie('addProduct');
+        /*$cookie = $this->getRequest()->getCookie();
+        if ($cookie && $cookie->offsetExists('addArticle')) {
+            $message = $cookie->offsetGet('addArticle');
 
-        /*if ($this->request->isPost()) {
-            $this->prg();
+            $cookie = new Setcookie('addArticle', '', time() - 3600, '/');
+            $this->getResponse()->getHeaders()->addHeader($cookie);
         }*/
+
+        $message = $this->appCookie()->getCookie('addArticle', $this);
 
         return new ViewModel([
             #'greeting' => $this->getGreetingService()->getGreeting(),
@@ -48,32 +53,16 @@ class ArticleController extends AbstractActionController
             'title' => $title,
         ];*/
 
-        /*$message = 'The article successfully added';
-        $container = new Container('add_product');
-        $container->message = $message;*/
+        /*$container = new Container('addArticle');
+        $container->message = 'Article successfully added';*/
 
-        $this->appSetCookie('addProduct', 'The article successfully added');
+        /*$cookie = new SetCookie('addArticle', 'Article successfully added', time() + 3600 * 24 * 100, '/');
+        $this->getResponse()->getHeaders()->addHeader($cookie);*/
+
+        $this->appCookie()->addCookie('addArticle', 'Article successfully added', $this);
 
         return $this->redirect()->toRoute('article');
     }
 
-    public function appSetCookie($cookieName, $message)
-    {
-        $cookie = new SetCookie($cookieName, $message, time() + 3600 * 24 * 100, '/');
-        $this->getResponse()->getHeaders()->addHeader($cookie);
-    }
 
-    public function appGetCookie($cookieName)
-    {
-        $message = '';
-        $cookie = $this->getRequest()->getCookie();
-        if ($cookie && $cookie->offsetExists($cookieName)) {
-            $message = $cookie->offsetGet($cookieName);
-
-            $cookie = new SetCookie($cookieName, '', time() - 3600, '/');
-            $this->getResponse()->getHeaders()->addHeader($cookie);
-
-            return $message;
-        }
-    }
 }

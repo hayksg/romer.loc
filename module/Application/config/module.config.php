@@ -20,6 +20,16 @@ return [
                     ],
                 ],
             ],
+            'download' => [
+                'type' => Literal::class,
+                'options' => [
+                    'route'    => '/download',
+                    'defaults' => [
+                        'controller' => Controller\IndexController::class,
+                        'action'     => 'download',
+                    ],
+                ],
+            ],
         ],
     ],
     'controllers' => [

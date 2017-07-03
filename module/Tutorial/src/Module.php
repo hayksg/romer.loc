@@ -45,7 +45,8 @@ class Module
     {
         return [
             'invokables' => [
-                'getDate' => Controller\Plugin\GetDate::class,
+                'getDate'   => Controller\Plugin\GetDate::class,
+                'appCookie' => Controller\Plugin\AppCookie::class,
             ],
         ];
     }
