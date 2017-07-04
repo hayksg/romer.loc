@@ -19,11 +19,11 @@ class ArticleController extends AbstractActionController
         $message = $container->message;
         $container->getManager()->getStorage()->clear('addArticle');*/
 
-        /*$cookie = $this->getRequest()->getCookie();
+        /*$cookie = $this->getRequest()->getCookie('addArticle');
         if ($cookie && $cookie->offsetExists('addArticle')) {
             $message = $cookie->offsetGet('addArticle');
 
-            $cookie = new Setcookie('addArticle', '', time() - 3600, '/');
+            $cookie = new SetCookie('addArticle', '', time() - 3600, '/');
             $this->getResponse()->getHeaders()->addHeader($cookie);
         }*/
 
@@ -53,13 +53,19 @@ class ArticleController extends AbstractActionController
             'title' => $title,
         ];*/
 
-        /*$container = new Container('addArticle');
-        $container->message = 'Article successfully added';*/
+        if ($title) {
+            $message = 'Article successfully added';
+        } else {
+            $message = 'Cannot add an article';
+        }
 
-        /*$cookie = new SetCookie('addArticle', 'Article successfully added', time() + 3600 * 24 * 100, '/');
+        /*$container = new Container('addArticle');
+        $container->message = $message;*/
+
+        /*$cookie = new SetCookie('addArticle', $message, time() + 3600 * 24 * 100, '/');
         $this->getResponse()->getHeaders()->addHeader($cookie);*/
 
-        $this->appCookie()->addCookie('addArticle', 'Article successfully added', $this);
+        $this->appCookie()->addCookie('addArticle', $message, $this);
 
         return $this->redirect()->toRoute('article');
     }
