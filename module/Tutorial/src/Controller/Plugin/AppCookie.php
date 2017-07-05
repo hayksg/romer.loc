@@ -15,14 +15,16 @@ class AppCookie extends AbstractPlugin
 
     public function getCookie($name, $obj)
     {
+        $message = '';
         $cookie = $obj->getRequest()->getCookie($name);
+        
         if ($cookie && $cookie->offsetExists($name)) {
             $message = $cookie->offsetGet($name);
-
+            
             $cookie = new SetCookie($name, '', time() - 3600, '/');
             $obj->getResponse()->getHeaders()->addHeader($cookie);
-
-            return $message;
         }
+        
+        return $message;
     }
 }
