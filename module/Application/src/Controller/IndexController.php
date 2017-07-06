@@ -25,25 +25,26 @@ class IndexController extends AbstractActionController
         $file = getcwd() . self::DS . 'public'
                          . self::DS . 'img'
                          . self::DS . 'c.jpg';
-        
+
         if (is_file($file)) {
+            $fileName = basename($file);
             $fileSize = filesize($file);
-            
+
             $stream = new Stream();
             $stream->setStream(fopen($file, 'r'))
-                   ->setStreamName(basename($file))
+                   ->setStreamName($fileName)
                    ->setStatusCode(200);
-            
+
             $headers = new Headers();
             $headers->addHeaderLine('Content-Type: application/octet-stream')
-                    ->addHeaderLine('Content-Disposition: attachment; filename = ' . basename($file))
+                    ->addHeaderLine('Content-Disposition: attachment; filename = ' . $fileName)
                     ->addHeaderLine('Content-Length: ' . $fileSize)
                     ->addHeaderLine('Cache-Control: no-store');
-            
+
             $stream->setHeaders($headers);
             return $stream;
         }
-        
+
         return false;
     }
 }

@@ -9,7 +9,6 @@ use Tutorial\Service\GreetingServiceInterface;
 use Zend\Session\Container;
 use Zend\Http\Header\SetCookie;
 
-
 class ArticleController extends AbstractActionController
 {
     public function indexAction()
@@ -17,17 +16,17 @@ class ArticleController extends AbstractActionController
         $message = '';
 
         /*$container = new Container('addArticle');
-        $message = $container->message;
+        $message = $container->mess;
         $container->getManager()->getStorage()->clear('addArticle');*/
 
-        /*$cookie = $this->getRequest()->getCookie('addArticle');
+        /*$cookie = $this->getRequest()->getCookie();
         if ($cookie && $cookie->offsetExists('addArticle')) {
             $message = $cookie->offsetGet('addArticle');
-            
-            $cookie = new SetCookie('addArticle', '', time() - 3600, '/');
+
+            $cookie = new setCookie('addArticle', '', time() - 3600, '/');
             $this->getResponse()->getHeaders()->addHeader($cookie);
         }*/
-        
+
         $message = $this->appCookie()->getCookie('addArticle', $this);
 
         return new ViewModel([
@@ -61,11 +60,11 @@ class ArticleController extends AbstractActionController
         }
 
         /*$container = new Container('addArticle');
-        $container->message = $message;*/
-        
+        $container->mess = $message;*/
+
         /*$cookie = new SetCookie('addArticle', $message, time() + 3600 * 24 * 100, '/');
         $this->getResponse()->getHeaders()->addHeader($cookie);*/
-        
+
         $this->appCookie()->addCookie('addArticle', $message, $this);
 
         return $this->redirect()->toRoute('article');
